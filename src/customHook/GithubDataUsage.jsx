@@ -1,30 +1,41 @@
-import React, { useState } from 'react';
-import { useGithubAccountData } from './useGithubAccountData';
+import React, { useState } from 'react'
+import { useGithubAccountData } from './useGithubAccountData'
 
 const GithubDataUsage = () => {
     const [account, setAccount] = useState('')
     const [inputValue, setInputValue] = useState('')
-    const accountData = useGithubAccountData(account)
+    const { accountData, error } = useGithubAccountData(account)
 
     const handleRequest = (e) => {
         e.preventDefault()
         setAccount(inputValue)
-        setInputValue("")
+        setInputValue('')
     }
 
     return (
         <div>
-            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+            <input
+                type="text"
+                placeholder="Enter GitHub username"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+            />
             <button onClick={handleRequest}>Check User</button>
 
-            {!account ? (<p>please provide Github username</p>) : (
-            <p>Github user {accountData.name} has {accountData.public_repos} public repositories.</p>
+            {!account ? (
+                <p>Please provide a GitHub username.</p>
+            ) : error ? (
+                <p style={{ color: 'red' }}>{error}</p>
+            ) : (
+                accountData && (
+                    <p>
+                        GitHub user {accountData.name || 'N/A'} has{' '}
+                        {accountData.public_repos || 0} public repositories.
+                    </p>
+                )
             )}
         </div>
-    );
-};
+    )
+}
 
-export default GithubDataUsage;
-
-
-
+export default GithubDataUsage
