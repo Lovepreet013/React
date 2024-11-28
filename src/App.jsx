@@ -12,6 +12,9 @@ import { ClassPropType } from './proptype/ClassPropType'
 import { FunctionalCompPropsTypes } from './proptype/FunctionalCompPropsTypes'
 import { Tabs } from './customHook/CustomHookUsage'
 import GithubDataUsage from './customHook/GithubDataUsage'
+import UseEffectHook from './hooks/useEffectHook'
+import Faac from './Faac and Render props/Faac'
+import RenderProps from './Faac and Render props/RenderProps'
 // import { Portal } from './Portal'
 
 const LazyLoaded = React.lazy(() => import("./LazyLoaded"))
@@ -33,13 +36,16 @@ function App(){
       <ForwardRef/>
       {/* <Portal/> */}
       <Modal/>
-      <Suspense fallback={<div>Lazy component loading...</div>}> {/*Used to show the loading(like loader, spinner) when a component is loading */}
+      <Suspense fallback={<div>Lazy component loading...</div>}> {/*Used (like loader, spinner) when a component is loading */}
         <LazyLoaded/>
       </Suspense>
       <ClassPropType title="Class PropType" date={new Date()} description="Nothing just checking how Proptypes work"/>
       <FunctionalCompPropsTypes title='Functional PropTypes' date={new Date()} description="Nothing just checking how Proptypes work"/>
       <Tabs/>
       <GithubDataUsage/>
+      <UseEffectHook/>
+      <Faac/>
+      <RenderProps/>
     </div>
   )
 }
